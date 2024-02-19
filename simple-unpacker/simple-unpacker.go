@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -73,11 +72,7 @@ func ConvertSlice(slice []rune) (string, error) {
 			// если является, то count меняем на новую цифру
 			// если нет, то count останется 1
 			if i < len(slice) && slice[i] >= '0' && slice[i] <= '9' {
-				var err error
-				count, err = strconv.Atoi(string(slice[i]))
-				if err != nil {
-					return "", err
-				}
+				count = int(slice[i] - '0') // Прямое вычитание для получения числового значения
 				i++
 			}
 
@@ -87,7 +82,7 @@ func ConvertSlice(slice []rune) (string, error) {
 			i++
 			// Проверяем, является ли следующий символ цифрой
 			if i < len(slice) && slice[i] >= '0' && slice[i] <= '9' {
-				count, _ = strconv.Atoi(string(slice[i]))
+				count = int(slice[i] - '0')
 				i++
 			}
 
